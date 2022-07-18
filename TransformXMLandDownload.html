@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transform XML and Download</title>
+        <link rel="stylesheet" type="text/css" href="TransformXMLandDownload.css" />
+    </head>
+
+    <body>
+
+        <div class="content">
+
+            <header class="header">
+                <h1>Transform XML and Download</h1>
+            </header>
+
+            <section class="form">
+
+                <form name="downloadConfig">
+
+                    <div class="form-item form-item-justified ">
+                        <label for="SourceFile">Source File</label>
+                        <input id="SourceFile" name="SourceFile" type="text" value="original.xml"></input>
+                    </div>
+
+                    <!-- <div class="form-item form-item-justified ">
+                        <label for="XSLFile">XSL File</label>
+                        <input id="XSLFile" name="XSLFile" type="text" value="transform.xsl"></input>
+                    </div> -->
+
+                    <div class="form-item form-item-justified ">
+                        <label for="TargetFile">Target File</label>
+                        <input id="TargetFile" name="TargetFile" type="text" value="transformed.xml"></input>
+                    </div>
+
+                    <div class="form-item">
+                        <input id="DownloadFile" name="DownloadFile" type="checkbox"></input>
+                        <label for="DownloadFile">Download File</label>
+                    </div>
+
+                    <div class="form-item">
+                        <input type="button" value="Transform and Download" onclick="transformAndDownload()">
+                    </div>
+                </form>
+
+            </section>
+
+        </div>
+
+        <!--Test only-->
+        <div id="Preview" class="content" style="display: none;">
+            <label for="Result">Result</label>
+            <textarea type="Result" id="Result" rows="10"></textarea>
+        </div>
+
+        <script src="TransformXMLandDownload.js"></script>
+
+    </body>
+
+</html>

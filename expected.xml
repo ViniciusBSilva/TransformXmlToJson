@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Results>
+    <Result>
+        <Sender_Partner>Sender_Partner_1</Sender_Partner>
+        <Sender_Component>Sender_Component_1</Sender_Component>
+        <Receiver_Partner>Receiver_Partner_1</Receiver_Partner>
+        <Receiver_Component>Receiver_Component_1</Receiver_Component>
+        <Interface>Interface_1</Interface>
+        <Interface_Namespace>Interface_Namespace_1</Interface_Namespace>
+        <Scenario_Identifier>Scenario_Identifier_1</Scenario_Identifier>
+        <Error>1</Error>
+        <Scheduled>11</Scheduled>
+        <Successful>111</Successful>
+        <Terminated_with_error>1111</Terminated_with_error>
+    </Result>
+    <Result>
+        <Sender_Partner>Sender_Partner_2</Sender_Partner>
+        <Sender_Component>Sender_Component_2</Sender_Component>
+        <Receiver_Partner>Receiver_Partner_2</Receiver_Partner>
+        <Receiver_Component>Receiver_Component_2</Receiver_Component>
+        <Interface>Interface_2</Interface>
+        <Interface_Namespace>Interface_Namespace_2</Interface_Namespace>
+        <Scenario_Identifier>Scenario_Identifier_2</Scenario_Identifier>
+        <Error>2</Error>
+        <Scheduled>22</Scheduled>
+        <Successful>222</Successful>
+        <Terminated_with_error>2222</Terminated_with_error>
+    </Result>
+</Results>

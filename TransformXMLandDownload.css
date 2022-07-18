@@ -1,0 +1,33 @@
+* {
+    font: 14px sans-serif;
+}
+
+.header {
+    text-align: center;
+}
+
+h1 {
+    font: bold 20px sans-serif;
+}
+
+.form-item {
+    display: flex;
+}
+
+.form-item {
+    margin: 7px;
+}
+
+.form-item-justified {
+    justify-content: space-between;
+}
+
+.content {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    background-color: lightgray;
+    border-radius: 2%;
+    border: 1px solid black;
+}
