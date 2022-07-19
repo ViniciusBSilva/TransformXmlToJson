@@ -43,17 +43,15 @@ function getDataNodeContent(sourceXml) {
 
         let dataNodeRow = {};
         let i = 0;
+        
         row.childNodes.forEach(child => {
-
             if (child.nodeType === Node.ELEMENT_NODE) {
-
                 dataNodeRow = {
                     ...dataNodeRow,
                     [columnNames[i]]: child.textContent,
                 }
                 i++;
             }
-
         });
 
         dataNode["Data"].push(dataNodeRow);
@@ -64,10 +62,11 @@ function getDataNodeContent(sourceXml) {
 }
 
 function getDataColumnNames(sourceXml) {
+
     let columnNames = {};
     let i = 0;
-    sourceXml.getElementsByTagName("ColumnNames")[0].childNodes.forEach(element => {
 
+    sourceXml.getElementsByTagName("ColumnNames")[0].childNodes.forEach(element => {
         if (element.nodeType === Node.ELEMENT_NODE) {
             columnNames = {
                 ...columnNames,
@@ -75,7 +74,9 @@ function getDataColumnNames(sourceXml) {
             }
         }
     });
+
     return columnNames;
+
 }
 
 function getResultNodeContent(sourceXml) {
@@ -85,7 +86,6 @@ function getResultNodeContent(sourceXml) {
     };
 
     sourceXml.getElementsByTagName("Result")[0].childNodes.forEach(element => {
-
         if (element.nodeType === Node.ELEMENT_NODE) {
             resultJson["Result"] =
             {
@@ -93,7 +93,6 @@ function getResultNodeContent(sourceXml) {
                 [element.nodeName]: element.textContent
             };
         }
-
     });
 
     return resultJson;
@@ -107,15 +106,15 @@ function downloadFile(stringContent) {
 }
 
 function download(filename, stringContent) {
+
     var element = document.createElement("a");
+
     element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(stringContent));
     element.setAttribute("download", filename);
-
     element.style.display = "none";
+
     document.body.appendChild(element);
-
     element.click();
-
     document.body.removeChild(element);
 
 }
