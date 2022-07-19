@@ -1,0 +1,35 @@
+{
+    "Result": {
+        "Code": "OK",
+        "Details": "LoadMessageOverviewData",
+        "Text": "Successfully retrieved data for Message Overview application."
+    },
+    "Data": [
+        {
+            "SenderPartner": "Sender_Partner_1",
+            "SenderComponent": "Sender_Component_1",
+            "ReceiverPartner": "Receiver_Partner_1",
+            "ReceiverComponent": "Receiver_Component_1",
+            "Interface": "Interface_1",
+            "InterfaceNamespace": "Interface_Namespace_1",
+            "ScenarioIdentifier": "Scenario_Identifier_1",
+            "Error": "1",
+            "Scheduled": "11",
+            "Successful": "111",
+            "Terminatedwitherror": "1111"
+        },
+        {
+            "SenderPartner": "Sender_Partner_2",
+            "SenderComponent": "Sender_Component_2",
+            "ReceiverPartner": "Receiver_Partner_2",
+            "ReceiverComponent": "Receiver_Component_2",
+            "Interface": "Interface_2",
+            "InterfaceNamespace": "Interface_Namespace_2",
+            "ScenarioIdentifier": "Scenario_Identifier_2",
+            "Error": "2",
+            "Scheduled": "22",
+            "Successful": "222",
+            "Terminatedwitherror": "2222"
+        }
+    ]
+}

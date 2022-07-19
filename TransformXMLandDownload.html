@@ -26,18 +26,13 @@
                         <input id="SourceFile" name="SourceFile" type="text" value="original.xml"></input>
                     </div>
 
-                    <!-- <div class="form-item form-item-justified ">
-                        <label for="XSLFile">XSL File</label>
-                        <input id="XSLFile" name="XSLFile" type="text" value="transform.xsl"></input>
-                    </div> -->
-
                     <div class="form-item form-item-justified ">
                         <label for="TargetFile">Target File</label>
-                        <input id="TargetFile" name="TargetFile" type="text" value="transformed.xml"></input>
+                        <input id="TargetFile" name="TargetFile" type="text" value="transformed.json"></input>
                     </div>
 
                     <div class="form-item">
-                        <input id="DownloadFile" name="DownloadFile" type="checkbox"></input>
+                        <input id="DownloadFile" name="DownloadFile" type="checkbox" checked></input>
                         <label for="DownloadFile">Download File</label>
                     </div>
 
@@ -52,8 +47,8 @@
 
         <!--Test only-->
         <div id="Preview" class="content" style="display: none;">
-            <label for="Result">Result</label>
-            <textarea type="Result" id="Result" rows="10"></textarea>
+            <label for="Output">Output</label>
+            <textarea type="Output" id="Output" rows="10"></textarea>
         </div>
 
         <script src="TransformXMLandDownload.js"></script>
