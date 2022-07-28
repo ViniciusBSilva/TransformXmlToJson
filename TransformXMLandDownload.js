@@ -23,8 +23,8 @@ function transformAndDownload() {
 
     } else {
         // Test only
-        const elPreview = document.getElementById("Preview").style.display = "";
-        const elResult = document.getElementById("Output").value = resultString;
+        document.getElementById("Preview").style.display = "";
+        document.getElementById("Output").value = resultString;
     }
 
 }
