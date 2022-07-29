@@ -6,10 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Transform XML and Download</title>
-        <link rel="stylesheet" type="text/css" href="TransformXMLandDownload.css" />
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
 
-    <body>
+    <body onload="onloadBody()">
 
         <div class="content">
 
@@ -23,17 +23,20 @@
 
                     <div class="form-item form-item-justified ">
                         <label for="SourceFile">Source File</label>
-                        <input id="SourceFile" name="SourceFile" type="text" value="original.xml"></input>
+                        <select name="SourceFile" id="SourceFile" class="inputs">
+                            <option value="MessageOverviewResponse.xml" selected>MessageOverviewResponse.xml</option>
+                            <option value="PeriodsResponse.xml">PeriodsResponse.xml</option>
+                        </select>
                     </div>
 
                     <div class="form-item form-item-justified ">
                         <label for="TargetFile">Target File</label>
-                        <input id="TargetFile" name="TargetFile" type="text" value="transformed.json"></input>
+                        <input id="TargetFile" name="TargetFile" type="text" class="inputs"></input>
                     </div>
 
                     <div class="form-item">
-                        <input id="DownloadFile" name="DownloadFile" type="checkbox" checked></input>
                         <label for="DownloadFile">Download File</label>
+                        <input id="DownloadFile" name="DownloadFile" type="checkbox" checked></input>
                     </div>
 
                     <div class="form-item">
@@ -51,7 +54,9 @@
             <textarea type="Output" id="Output" rows="10"></textarea>
         </div>
 
-        <script src="TransformXMLandDownload.js"></script>
+        <script src="periodsResponseToJson.js"></script>
+        <script src="messageOverviewResponseToJson.js"></script>
+        <script src="scripts.js"></script>
 
     </body>
 
