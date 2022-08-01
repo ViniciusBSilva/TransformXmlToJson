@@ -36,3 +36,7 @@ h1 {
     border-radius: 2%;
     border: 1px solid black;
 }
+
+.hide {
+    display: none;
+}

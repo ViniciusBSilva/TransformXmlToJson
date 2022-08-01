@@ -50,7 +50,7 @@ function transformAndDownload() {
 
     } else {
         // Test only
-        document.getElementById("Preview").style.display = "";
+        document.getElementById("Preview").classList.remove("hide");
         document.getElementById("Output").value = resultString;
     }
 

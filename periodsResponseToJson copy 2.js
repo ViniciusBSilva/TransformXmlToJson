@@ -10,9 +10,9 @@ function getPeriods(apiResponse) {
 
     console.clear();
 
-    const periodsElement = apiResponse.getElementsByTagName("Periods")[0];
+    const periodsNode = apiResponse.getElementsByTagName("Periods")[0];
 
-    return handleNode(periodsElement);
+    return readChildren(periodsNode);
 
 }
 
@@ -73,9 +73,13 @@ function readChildren(node) {
     }
 }
 
-function handleNode(element) {
+function handleNode(nodeArray) {
 
-    if (areAllChildrenTheSame(element)) {
+    const element = nodeArray[0];
+
+    const childrenArray = [...element.children];
+
+    if (childrenArray.every(child => child.nodeName === element.firstElementChild.nodeName)) {
         // All child element nodes are the same, an array is expected
 
         const childrenContentArray = readChildrenContentToArray(element);
@@ -87,37 +91,6 @@ function handleNode(element) {
     } else {
         // Not all child element nodes are the same, should handle siblings
         console.log("TODO: Handle this");
-
-        //TODO: read all nodes that have the same name to build the arrays
-        //TODO: read all unique nodes to build the object with all
-        //TODO: join the object with the arrays using each array name
-
-        /** 
-         * Example:
-         * 
-         * {
-         * 
-         * node 1: value,
-         * node 2: value,
-         * array 1: [],
-         * array 2: []
-         * 
-         * }
-         * */
-
-        return "";
-    }
-
-}
-
-function areAllChildrenTheSame(element) {
-
-    const childrenArray = [...element.children];
-
-    if (childrenArray.every(child => child.nodeName === element.firstElementChild.nodeName)) {
-        return true;
-    } else {
-        return false;
     }
 
 }
@@ -131,7 +104,7 @@ function readChildrenContentToArray(parentElement) {
     childrenArray.forEach(child => {
 
         contentArray.push({
-            [child.nodeName]: handleNode(child)
+            [child.nodeName]: "childrenNodes"
         });
 
     });
