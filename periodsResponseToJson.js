@@ -113,14 +113,7 @@ function handleNode(element) {
 
             childrenArray.forEach((child, index) => {
 
-                const newArrayWithoutCurrentNode = childrenArray.filter((filterChild, filterIndex) => filterIndex != index);
-
-                const newArrayNodesWithSameName = newArrayWithoutCurrentNode.filter(filterChild => filterChild.nodeName === child.nodeName);
-
-                console.log(newArrayNodesWithSameName);
-
-
-                if (newArrayNodesWithSameName.length > 0) {
+                if (hasSiblingsWithSameName(child, childrenArray)) {
 
                     // Has nodes with the same name
                     // Filter all to create an array
@@ -204,4 +197,17 @@ function readChildrenContentToArray(parentElement) {
 
     return contentArray;
 
+}
+
+function hasSiblingsWithSameName(element, parentChildrenArray) {
+
+    const nodesWithSameName = parentChildrenArray.filter(child => {
+        return child != element && child.nodeName === element.nodeName;
+    });
+
+    if (nodesWithSameName.length > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
