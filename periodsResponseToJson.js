@@ -75,42 +75,108 @@ function readChildren(node) {
 
 function handleNode(element) {
 
-    if (areAllChildrenTheSame(element)) {
-        // All child element nodes are the same, an array is expected
+    if (hasChildElementNodes(element)) {
 
-        const childrenContentArray = readChildrenContentToArray(element);
+        if (areAllChildrenTheSame(element)) {
+            // All child element nodes are the same, an array is expected
 
-        return {
-            [element.nodeName]: childrenContentArray
-        };
+            const childrenContentArray = readChildrenContentToArray(element);
+
+            return {
+                [element.nodeName]: childrenContentArray
+            };
+
+        } else {
+            // Not all child element nodes are the same, should handle siblings
+            console.log("TODO: Handle this");
+
+            //TODO: read all nodes that have the same name to build the arrays
+            //TODO: read all unique nodes to build the object with all
+            //TODO: join the object with the arrays using each array name
+
+            /** 
+             * Example:
+             * 
+             * {
+             * 
+             * node 1: value,
+             * node 2: value,
+             * array 1: [],
+             * array 2: []
+             * 
+             * }
+             * */
+
+            let nodesContentObject = {};
+
+            const childrenArray = [...element.children];
+
+            childrenArray.forEach((child, index) => {
+
+                const newArrayWithoutCurrentNode = childrenArray.filter((filterChild, filterIndex) => filterIndex != index);
+
+                const newArrayNodesWithSameName = newArrayWithoutCurrentNode.filter(filterChild => filterChild.nodeName === child.nodeName);
+
+                console.log(newArrayNodesWithSameName);
+
+
+                if (newArrayNodesWithSameName.length > 0) {
+
+                    // Has nodes with the same name
+                    // Filter all to create an array
+                    // Remove all from the current array
+
+                    // TODO: handle this
+                    console.log("TODO: Handle this");
+
+                } else {
+
+                    // Doesn't have other nodes with the same name 
+                    // Handled as individual node
+
+                    const childContent = handleNode(child);
+
+                    nodesContentObject = {
+                        ...nodesContentObject,
+                        ...childContent
+                    };
+
+                    // TODO: Should be removed from the current array?
+                    console.log("TODO: Remove node?");
+
+                }
+
+            });
+
+            //TODO:
+            // valueToReturn = {
+            //     ...nodesContentObject,
+            //     ...array
+            // };
+            // return valueToReturn;
+
+            return nodesContentObject;
+        }
 
     } else {
-        // Not all child element nodes are the same, should handle siblings
-        console.log("TODO: Handle this");
 
-        //TODO: read all nodes that have the same name to build the arrays
-        //TODO: read all unique nodes to build the object with all
-        //TODO: join the object with the arrays using each array name
+        return {
+            [element.nodeName]: element.textContent
+        };
 
-        /** 
-         * Example:
-         * 
-         * {
-         * 
-         * node 1: value,
-         * node 2: value,
-         * array 1: [],
-         * array 2: []
-         * 
-         * }
-         * */
-
-        return "";
     }
 
 }
 
+function hasChildElementNodes(element) {
+    return (element.childElementCount > 0);
+}
+
 function areAllChildrenTheSame(element) {
+
+    if (!hasChildElementNodes(element)) {
+        return false;
+    }
 
     const childrenArray = [...element.children];
 
