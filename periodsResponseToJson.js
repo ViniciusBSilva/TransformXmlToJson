@@ -8,8 +8,6 @@ function periodsResponseToJson(apiResponse) {
 
 function getPeriods(apiResponse) {
 
-    console.clear();
-
     const periodsElement = apiResponse.getElementsByTagName("Periods")[0];
 
     return handleNode(periodsElement);
@@ -32,9 +30,6 @@ function handleNode(element) {
         } else {
 
             const childrenSummary = readChildrenSummary(element);
-
-            //TODO: check the possibility to remove if (areAllChildrenTheSame(element)) by using Object.keys
-            // console.log("Object.keys(childrenSummary).length", Object.keys(childrenSummary).length)
 
             const childrenArray = [...element.childNodes];
 
@@ -98,11 +93,9 @@ function handleNode(element) {
         }
 
     } else {
-
         return {
             [element.nodeName]: element.textContent
         };
-
     }
 
 }
@@ -130,15 +123,12 @@ function areAllChildrenTheSame(element) {
 function readChildrenContentToArray(parentElement) {
 
     const childrenArray = [...parentElement.children];
-
     const contentArray = [];
 
     childrenArray.forEach(child => {
-
         contentArray.push({
             [child.nodeName]: handleNode(child)
         });
-
     });
 
     return contentArray;
