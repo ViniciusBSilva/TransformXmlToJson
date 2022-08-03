@@ -16,63 +16,6 @@ function getPeriods(apiResponse) {
 
 }
 
-function readChildren(node) {
-
-    console.groupEnd();
-    console.group();
-
-    console.groupCollapsed("Trace");
-    console.trace();
-    console.groupEnd();
-
-    // Create an array from the node input (or just use it if it's already an array)
-    const nodeArray = Array.isArray(node) ? node : [node];
-
-    console.log("nodeCollection", nodeArray);
-    console.log("nodeCollection.length", nodeArray.length);
-
-    if (nodeArray.length > 1) {
-
-        const childrenArray = [];
-        let childrenObj = {};
-
-        [...nodeArray].forEach(element => {
-
-            if (element.childElementCount > 0) {
-
-                // const childrenNodes = readChildren([...element.children]);
-
-                childrenArray.push({
-                    [element.nodeName]: "childrenNodes"
-                });
-
-
-            } else {
-                childrenObj = {
-                    ...childrenObj,
-                    [element.nodeName]: element.textContent
-                };
-            }
-
-        });
-
-        if (childrenArray.length > 0) {
-            childrenObj = {
-                ...childrenObj,
-                childrenArray
-            }
-        }
-
-        console.groupEnd();
-        return childrenObj;
-
-    } else {
-
-        return handleNode(nodeArray);
-
-    }
-}
-
 function handleNode(element) {
 
     if (hasChildElementNodes(element)) {
@@ -87,68 +30,60 @@ function handleNode(element) {
             };
 
         } else {
-            // Not all child element nodes are the same, should handle siblings
-            console.log("TODO: Handle this");
 
-            //TODO: read all nodes that have the same name to build the arrays
-            //TODO: read all unique nodes to build the object with all
-            //TODO: join the object with the arrays using each array name
+            const childrenSummary = readChildrenSummary(element);
 
-            /** 
-             * Example:
-             * 
-             * {
-             * 
-             * node 1: value,
-             * node 2: value,
-             * array 1: [],
-             * array 2: []
-             * 
-             * }
-             * */
+            //TODO: check the possibility to remove if (areAllChildrenTheSame(element)) by using Object.keys
+            // console.log("Object.keys(childrenSummary).length", Object.keys(childrenSummary).length)
 
-            let nodesContentObject = {};
+            const childrenArray = [...element.childNodes];
 
-            const childrenArray = [...element.children];
+            let elContentObj = {};
+            const elContentArray = [];
 
-            childrenArray.forEach((child, index) => {
+            for (let countedChild in childrenSummary) {
 
-                if (hasSiblingsWithSameName(child, childrenArray)) {
+                if (childrenSummary[countedChild] > 1) {
+                    // Has siblings with the same name
 
-                    // Has nodes with the same name
-                    // Filter all to create an array
-                    // Remove all from the current array
+                    const childContentArray = [];
 
-                    // TODO: handle this
-                    console.log("TODO: Handle this");
+                    /* 
+                        Decided to go with "forEach"+"if" instead of filter because the array will be
+                        looped either way
+                    */
+                    childrenArray.forEach(child => {
+                        if (child.nodeName === countedChild) {
+                            const childContent = handleNode(child);
+                            childContentArray.push(childContent);
+                        }
+                    })
+
+                    elContentArray.push({
+                        [countedChild]: childContentArray
+                    });
 
                 } else {
+                    // Doesn't have siblings with the same name
 
-                    // Doesn't have other nodes with the same name 
-                    // Handled as individual node
+                    const child = childrenArray.find(el => el.nodeName === countedChild);
+                    const content = handleNode(child);
 
-                    const childContent = handleNode(child);
-
-                    nodesContentObject = {
-                        ...nodesContentObject,
-                        ...childContent
+                    elContentObj = {
+                        ...elContentObj,
+                        ...content
                     };
-
-                    // TODO: Should be removed from the current array?
-                    console.log("TODO: Remove node?");
 
                 }
 
-            });
+            }
 
-            //TODO:
-            // valueToReturn = {
-            //     ...nodesContentObject,
-            //     ...array
-            // };
-            // return valueToReturn;
+            const returnContent = {
+                ...elContentObj,
+                ...elContentArray
+            }
 
-            return nodesContentObject;
+            return returnContent;
         }
 
     } else {
@@ -199,15 +134,13 @@ function readChildrenContentToArray(parentElement) {
 
 }
 
-function hasSiblingsWithSameName(element, parentChildrenArray) {
+function readChildrenSummary(element) {
 
-    const nodesWithSameName = parentChildrenArray.filter(child => {
-        return child != element && child.nodeName === element.nodeName;
-    });
+    return [...element.children].reduce(
+        (acc, cur) => (
+            acc[cur.nodeName] = (acc[cur.nodeName] || 0) + 1,
+            acc
+        )
+        , {});
 
-    if (nodesWithSameName.length > 0) {
-        return true;
-    } else {
-        return false;
-    }
 }
