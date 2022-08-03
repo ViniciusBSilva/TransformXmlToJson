@@ -78,12 +78,23 @@ function handleNode(element) {
 
             }
 
-            const returnContent = {
-                ...elContentObj,
-                ...elContentArray
-            }
+            if (elContentArray.length > 0) {
 
-            return returnContent;
+                let returnContent = { ...elContentObj };
+
+                elContentArray.forEach(content => {
+                    returnContent = {
+                        ...returnContent,
+                        ...content
+                    }
+
+                })
+
+                return returnContent;
+
+            } else {
+                return elContentObj;
+            }
         }
 
     } else {
