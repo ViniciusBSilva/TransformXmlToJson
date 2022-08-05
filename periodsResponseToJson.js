@@ -1,16 +1,15 @@
 function periodsResponseToJson(apiResponse) {
 
-    const periods = getPeriods(apiResponse);
+    const periods = getElementContent(apiResponse, "Periods");
 
     return periods;
 
 }
 
-function getPeriods(apiResponse) {
+function getElementContent(sourceXml, elementName) {
 
-    const periodsElement = apiResponse.getElementsByTagName("Periods")[0];
-
-    return handleNode(periodsElement);
+    const htmlCollection = sourceXml.getElementsByTagName(elementName)[0];
+    return handleNode(htmlCollection);
 
 }
 

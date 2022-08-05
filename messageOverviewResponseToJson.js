@@ -27,14 +27,13 @@ function getDataNodeContent(sourceXml) {
         let dataNodeRow = {};
         let i = 0;
 
-        row.childNodes.forEach(child => {
-            if (child.nodeType === Node.ELEMENT_NODE) {
-                dataNodeRow = {
-                    ...dataNodeRow,
-                    [columnNames[i]]: handleEmptyValues(columnNames[i], child.textContent),
-                }
-                i++;
+        const childrenArray = [...row.children];
+        childrenArray.forEach(child => {
+            dataNodeRow = {
+                ...dataNodeRow,
+                [columnNames[i]]: handleEmptyValues(columnNames[i], child.textContent),
             }
+            i++;
         });
 
         dataNode["Data"].push(dataNodeRow);
@@ -64,26 +63,29 @@ function getDataColumnNames(sourceXml) {
     let columnNames = {};
     let i = 0;
 
-    sourceXml.getElementsByTagName("ColumnNames")[0].childNodes.forEach(element => {
-        if (element.nodeType === Node.ELEMENT_NODE) {
-            columnNames = {
-                ...columnNames,
-                [i++]: element.textContent.replace(/\s+/g, '')
-            }
+    const columnNamesElement = sourceXml.getElementsByTagName("ColumnNames")[0];
+    const childrenArray = [...columnNamesElement.children];
+
+    childrenArray.forEach(element => {
+        columnNames = {
+            ...columnNames,
+            [i++]: element.textContent.replace(/\s+/g, '')
         }
     });
 
     return columnNames;
 
 }
-
 function getResultNodeContent(sourceXml) {
 
     let resultJson = {
         "Result": {}
     };
 
-    sourceXml.getElementsByTagName("Result")[0].childNodes.forEach(element => {
+    const resultElement = sourceXml.getElementsByTagName("Result")[0];
+    const childrenArray = [...resultElement.children];
+
+    childrenArray.forEach(element => {
         if (element.nodeType === Node.ELEMENT_NODE) {
             resultJson["Result"] =
             {
